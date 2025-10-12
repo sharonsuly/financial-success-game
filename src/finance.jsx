@@ -1,5 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { Star, ArrowRight, RotateCcw, Plus, Minus, Volume2, VolumeX } from 'react-feather';
+/* eslint-disable global-require, no-undef */
+const React =
+    (typeof window !== 'undefined' && window.React) ||
+    (typeof require !== 'undefined' ? require('react') : null);
+
+if (!React) {
+  throw new Error('React is required to render FinancialSuccessGame');
+}
+
+const { useState, useEffect } = React;
+
+const ReactDOMGlobal =
+    (typeof window !== 'undefined' && window.ReactDOM) ||
+    (typeof require !== 'undefined'
+        ? (() => {
+          try {
+            return require('react-dom');
+          } catch (error) {
+            return null;
+          }
+        })()
+        : null);
+
+const FeatherIconsImport =
+    (typeof require !== 'undefined'
+        ? (() => {
+          try {
+            return require('react-feather');
+          } catch (error) {
+            return null;
+          }
+        })()
+        : null) ||
+    (typeof window !== 'undefined' ? window.FeatherIcons : null);
+
+if (typeof require !== 'undefined') {
+  try {
+    require('./finance.css');
+  } catch (error) {
+    // ignore when bundler does not handle CSS requires (e.g., in CodePen)
+  }
+}
+
+const FeatherIcons = FeatherIconsImport || {};
+
+const createFeatherIcon = (componentName, featherName) => {
+  const ReactFeatherIcon = FeatherIcons[componentName];
+
+  if (ReactFeatherIcon) {
+    return ReactFeatherIcon;
+  }
+
+  const FallbackIcon = ({ className = 'w-6 h-6', ...rest }) => {
+    const icon = typeof window !== 'undefined' && window.feather?.icons?.[featherName];
+    if (!icon) {
+      return <span className={className} {...rest} />;
+    }
+
+    return (
+        <span
+            className={className}
+            {...rest}
+            dangerouslySetInnerHTML={{
+              __html: icon.toSvg({ class: className })
+            }}
+        />
+    );
+  };
+
+  return FallbackIcon;
+};
+
+const Star = createFeatherIcon('Star', 'star');
+const ArrowRight = createFeatherIcon('ArrowRight', 'arrow-right');
+const Volume2 = createFeatherIcon('Volume2', 'volume-2');
+const VolumeX = createFeatherIcon('VolumeX', 'volume-x');
+const RotateCcw = createFeatherIcon('RotateCcw', 'rotate-ccw');
+const Plus = createFeatherIcon('Plus', 'plus');
+const Minus = createFeatherIcon('Minus', 'minus');
 
 const FinancialSuccessGame = () => {
   const [currentStage, setCurrentStage] = useState('opening');
@@ -408,7 +485,7 @@ const FinancialSuccessGame = () => {
   };
 
   // Background gradient for all pages
-  const bgGradient = "bg-gradient-to-br from-green-800 via-green-600 to-green-400";
+  const bgGradient = "finance-gradient bg-gradient-to-br from-green-800 via-green-600 to-green-400";
 
   if (currentStage === 'opening') {
     return (
@@ -421,13 +498,13 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 100px)' }}>
+          <div className="flex items-center justify-center p-4 finance-viewport">
             <div className="text-center max-w-2xl">
               <div className={`mb-8 ${showAnimation ? 'animate-pulse' : ''}`}>
-                <h1 style={{ fontSize: '94px' }} className="font-bold text-white mb-4 drop-shadow-lg">
+                <h1 className="font-bold text-white mb-4 drop-shadow-lg finance-title-xl">
                   המרוץ ליעד
                 </h1>
-                <h2 style={{ fontSize: '28px' }} className="text-white mb-4 drop-shadow-lg">
+                <h2 className="text-white mb-4 drop-shadow-lg finance-title-lg">
                   תכנית ההצלחה הכלכלית שלך
                 </h2>
               </div>
@@ -442,7 +519,7 @@ const FinancialSuccessGame = () => {
                 ))}
               </div>
 
-              <div style={{ fontSize: '34px' }} className="text-white font-bold mb-8 animate-pulse">
+              <div className="text-white font-bold mb-8 animate-pulse finance-countdown">
                 3... 2... 1... מתחילים!
               </div>
 
@@ -451,8 +528,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('info');
                     setTimeout(() => playSound('start'), 0);
                   }}
-                  style={{ backgroundColor: '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
               >
                 בואו נתחיל!
               </button>
@@ -467,7 +543,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -480,7 +556,7 @@ const FinancialSuccessGame = () => {
 
           <div className="p-4">
             <div className="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-8 mt-10">
-              <h2 style={{ fontSize: '28px' }} className="font-bold text-center mb-8 text-gray-800">
+              <h2 className="font-bold text-center mb-8 text-gray-800 finance-title-lg">
                 בואו נכיר! 👋
               </h2>
 
@@ -516,8 +592,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('goals');
                   }}
                   disabled={!studentInfo.firstName || !studentInfo.lastName}
-                  style={{ backgroundColor: !studentInfo.firstName || !studentInfo.lastName ? '#ccc' : '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                  className="w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95"
+                  className={`w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 finance-cta-button ${!studentInfo.firstName || !studentInfo.lastName ? 'finance-disabled-button' : 'finance-primary-button'}`}
               >
                 המשך לבחירת יעד
               </button>
@@ -532,7 +607,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -596,7 +671,7 @@ const FinancialSuccessGame = () => {
 
               {selectedGoal && (
                   <div className="bg-white rounded-3xl p-8 text-center shadow-2xl">
-                    <h3 style={{ fontSize: '28px' }} className="font-bold text-gray-800 mb-2">
+                    <h3 className="font-bold text-gray-800 mb-2 finance-title-lg">
                       היעד שלי:
                     </h3>
                     <p className="text-2xl font-bold text-blue-600 mb-4">
@@ -610,8 +685,7 @@ const FinancialSuccessGame = () => {
                           playSound('continue');
                           setCurrentStage('passive income');
                         }}
-                        style={{ backgroundColor: '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
                     >
                       בואו נתחיל לחשב!
                     </button>
@@ -632,7 +706,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4">
-                <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -668,7 +742,7 @@ const FinancialSuccessGame = () => {
           <div className="p-4">
             <div className="max-w-6xl mx-auto">
               <div className="bg-white rounded-3xl p-6 mb-8 shadow-2xl">
-                <h3 style={{ fontSize: '28px' }} className="font-bold text-center mb-6 text-gray-800">
+                <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
                   הכנסות פסיביות במהלך השנה
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -774,8 +848,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('active income');
                     }}
-                    style={{ backgroundColor: '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
                 >
                   המשך להכנסות אקטיביות
                 </button>
@@ -794,7 +867,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4">
-                <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -824,7 +897,7 @@ const FinancialSuccessGame = () => {
           <div className="p-4">
             <div className="max-w-6xl mx-auto">
               <div className="bg-white rounded-3xl p-6 mb-8 shadow-2xl">
-                <h3 style={{ fontSize: '28px' }} className="font-bold text-center mb-6 text-gray-800">
+                <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
                   עשייה שתלויה בי
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -928,8 +1001,7 @@ const FinancialSuccessGame = () => {
                                     playSound('expense');
                                     updateActiveIncomeTimes(item.id, -1);
                                   }}
-                                  style={{ backgroundColor: '#EF4444', border: '2px solid white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)' }}
-                                  className="hover:brightness-110 text-white p-1 rounded-lg transition-all"
+                                  className="hover:brightness-110 text-white p-1 rounded-lg transition-all finance-small-button finance-decrement-button"
                               >
                                 <Minus className="w-4 h-4" />
                               </button>
@@ -941,8 +1013,7 @@ const FinancialSuccessGame = () => {
                                     playSound('income');
                                     updateActiveIncomeTimes(item.id, 1);
                                   }}
-                                  style={{ backgroundColor: '#22C55E', border: '2px solid white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)' }}
-                                  className="hover:brightness-110 text-white p-1 rounded-lg transition-all"
+                                  className="hover:brightness-110 text-white p-1 rounded-lg transition-all finance-small-button finance-increment-button"
                               >
                                 <Plus className="w-4 h-4" />
                               </button>
@@ -976,8 +1047,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('expenses');
                     }}
-                    style={{ backgroundColor: '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
                 >
                   המשך להוצאות
                 </button>
@@ -997,7 +1067,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4">
-                <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -1027,7 +1097,7 @@ const FinancialSuccessGame = () => {
           <div className="p-4">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-3xl p-8 shadow-2xl">
-                <h3 style={{ fontSize: '28px' }} className="font-bold text-center mb-6 text-gray-800">
+                <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
                   מתוך כל ההכנסות שלי אני בוחר להוציא בשבוע:
                 </h3>
 
@@ -1096,8 +1166,7 @@ const FinancialSuccessGame = () => {
                         setCurrentStage('summary');
                       }}
                       disabled={!selectedExpense}
-                      style={{ backgroundColor: selectedExpense ? '#8B5CF6' : '#ccc', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                      className="hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                      className={`hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button ${selectedExpense ? 'finance-primary-button' : 'finance-disabled-button'}`}
                   >
                     סיום המשחק
                   </button>
@@ -1150,7 +1219,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} style={{ backgroundColor: '#664F3F' }} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -1165,14 +1234,14 @@ const FinancialSuccessGame = () => {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <div className="text-8xl mb-4">{goalAchieved ? '🏆' : '💪'}</div>
-                <h2 style={{ fontSize: '94px' }} className="font-bold text-white mb-4 drop-shadow-lg">
+                <h2 className="font-bold text-white mb-4 drop-shadow-lg finance-title-xl">
                   כל הכבוד!
                 </h2>
-                <p style={{ fontSize: '28px' }} className="text-yellow-300 font-semibold drop-shadow">
+                <p className="text-yellow-300 font-semibold drop-shadow finance-title-lg">
                   {goalAchieved ? 'יצרת את תכנית ההצלחה להשגת היעד הכלכלי שלך' : 'עשית צעד חשוב קדימה'}
                 </p>
                 {!goalAchieved && (
-                    <p style={{ fontSize: '24px' }} className="text-yellow-200 font-semibold drop-shadow mt-2">
+                    <p className="text-yellow-200 font-semibold drop-shadow mt-2 finance-title-md">
                       חזרו לתקן את התכנית כדי להגיע ליעד
                     </p>
                 )}
@@ -1254,7 +1323,7 @@ const FinancialSuccessGame = () => {
 
               {goalAchieved && (
                   <div className="bg-white rounded-3xl p-8 shadow-2xl mb-8">
-                    <h3 style={{ fontSize: '28px' }} className="font-bold text-center mb-6 text-gray-800">
+                    <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
                       📋 תכנית ההצלחה שלך
                     </h3>
 
@@ -1483,8 +1552,7 @@ const FinancialSuccessGame = () => {
                       playSound('start');
                       resetGame();
                     }}
-                    style={{ backgroundColor: '#8B5CF6', border: '4px solid white', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)' }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
                 >
                   <RotateCcw className="w-6 h-6 inline ml-2" />
                   התחילו מחדש
@@ -1507,4 +1575,29 @@ const FinancialSuccessGame = () => {
   return null;
 };
 
-export default FinancialSuccessGame;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = FinancialSuccessGame;
+  module.exports.default = FinancialSuccessGame;
+  module.exports.FinancialSuccessGame = FinancialSuccessGame;
+}
+
+if (typeof window !== 'undefined') {
+  window.FinancialSuccessGame = FinancialSuccessGame;
+}
+
+if (
+    ReactDOMGlobal &&
+    typeof document !== 'undefined' &&
+    typeof module === 'undefined'
+) {
+  const rootElement = document.getElementById('root');
+  if (rootElement && !rootElement.__FINANCIAL_SUCCESS_GAME_MOUNTED__) {
+    const renderElement = React.createElement(FinancialSuccessGame);
+    if (ReactDOMGlobal.createRoot) {
+      ReactDOMGlobal.createRoot(rootElement).render(renderElement);
+    } else {
+      ReactDOMGlobal.render(renderElement, rootElement);
+    }
+    rootElement.__FINANCIAL_SUCCESS_GAME_MOUNTED__ = true;
+  }
+}

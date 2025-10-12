@@ -1,0 +1,54 @@
+.finance-gradient {
+  background: linear-gradient(135deg, #065f46, #15803d 50%, #22c55e);
+}
+
+.finance-viewport {
+  min-height: calc(100vh - 100px);
+}
+
+.finance-title-xl {
+  font-size: 94px;
+}
+
+.finance-title-lg {
+  font-size: 28px;
+}
+
+.finance-title-md {
+  font-size: 24px;
+}
+
+.finance-countdown {
+  font-size: 34px;
+}
+
+.finance-cta-button {
+  border: 4px solid #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.finance-primary-button {
+  background-color: #8b5cf6;
+}
+
+.finance-disabled-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.finance-back-button {
+  background-color: #664f3f;
+}
+
+.finance-small-button {
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.finance-decrement-button {
+  background-color: #ef4444;
+}
+
+.finance-increment-button {
+  background-color: #22c55e;
+}
