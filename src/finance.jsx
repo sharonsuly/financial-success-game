@@ -1,82 +1,14 @@
-/* eslint-disable global-require, no-undef */
-const React =
-    (typeof window !== 'undefined' && window.React) ||
-    (typeof require !== 'undefined' ? require('react') : null);
-
-if (!React) {
-  throw new Error('React is required to render FinancialSuccessGame');
-}
-
-const { useState, useEffect } = React;
-
-const ReactDOMGlobal =
-    (typeof window !== 'undefined' && window.ReactDOM) ||
-    (typeof require !== 'undefined'
-        ? (() => {
-          try {
-            return require('react-dom');
-          } catch (error) {
-            return null;
-          }
-        })()
-        : null);
-
-const FeatherIconsImport =
-    (typeof require !== 'undefined'
-        ? (() => {
-          try {
-            return require('react-feather');
-          } catch (error) {
-            return null;
-          }
-        })()
-        : null) ||
-    (typeof window !== 'undefined' ? window.FeatherIcons : null);
-
-if (typeof require !== 'undefined') {
-  try {
-    require('./finance.css');
-  } catch (error) {
-    // ignore when bundler does not handle CSS requires (e.g., in CodePen)
-  }
-}
-
-const FeatherIcons = FeatherIconsImport || {};
-
-const createFeatherIcon = (componentName, featherName) => {
-  const ReactFeatherIcon = FeatherIcons[componentName];
-
-  if (ReactFeatherIcon) {
-    return ReactFeatherIcon;
-  }
-
-  const FallbackIcon = ({ className = 'w-6 h-6', ...rest }) => {
-    const icon = typeof window !== 'undefined' && window.feather?.icons?.[featherName];
-    if (!icon) {
-      return <span className={className} {...rest} />;
-    }
-
-    return (
-        <span
-            className={className}
-            {...rest}
-            dangerouslySetInnerHTML={{
-              __html: icon.toSvg({ class: className })
-            }}
-        />
-    );
-  };
-
-  return FallbackIcon;
-};
-
-const Star = createFeatherIcon('Star', 'star');
-const ArrowRight = createFeatherIcon('ArrowRight', 'arrow-right');
-const Volume2 = createFeatherIcon('Volume2', 'volume-2');
-const VolumeX = createFeatherIcon('VolumeX', 'volume-x');
-const RotateCcw = createFeatherIcon('RotateCcw', 'rotate-ccw');
-const Plus = createFeatherIcon('Plus', 'plus');
-const Minus = createFeatherIcon('Minus', 'minus');
+import React, { useState, useEffect } from 'react';
+import {
+  Star,
+  ArrowRight,
+  RotateCcw,
+  Plus,
+  Minus,
+  Volume2,
+  VolumeX,
+} from 'react-feather';
+import './finance.css';
 
 const FinancialSuccessGame = () => {
   const [currentStage, setCurrentStage] = useState('opening');
@@ -1575,29 +1507,4 @@ const FinancialSuccessGame = () => {
   return null;
 };
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = FinancialSuccessGame;
-  module.exports.default = FinancialSuccessGame;
-  module.exports.FinancialSuccessGame = FinancialSuccessGame;
-}
-
-if (typeof window !== 'undefined') {
-  window.FinancialSuccessGame = FinancialSuccessGame;
-}
-
-if (
-    ReactDOMGlobal &&
-    typeof document !== 'undefined' &&
-    typeof module === 'undefined'
-) {
-  const rootElement = document.getElementById('root');
-  if (rootElement && !rootElement.__FINANCIAL_SUCCESS_GAME_MOUNTED__) {
-    const renderElement = React.createElement(FinancialSuccessGame);
-    if (ReactDOMGlobal.createRoot) {
-      ReactDOMGlobal.createRoot(rootElement).render(renderElement);
-    } else {
-      ReactDOMGlobal.render(renderElement, rootElement);
-    }
-    rootElement.__FINANCIAL_SUCCESS_GAME_MOUNTED__ = true;
-  }
-}
+export default FinancialSuccessGame;
