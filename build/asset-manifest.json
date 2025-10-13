@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/financial-success-game/static/css/main.6867d2b3.css",
-    "main.js": "/financial-success-game/static/js/main.fc6267b0.js",
+    "main.js": "/financial-success-game/static/js/main.cf3e25aa.js",
     "static/js/453.3eedbe03.chunk.js": "/financial-success-game/static/js/453.3eedbe03.chunk.js",
     "index.html": "/financial-success-game/index.html",
     "main.6867d2b3.css.map": "/financial-success-game/static/css/main.6867d2b3.css.map",
-    "main.fc6267b0.js.map": "/financial-success-game/static/js/main.fc6267b0.js.map",
+    "main.cf3e25aa.js.map": "/financial-success-game/static/js/main.cf3e25aa.js.map",
     "453.3eedbe03.chunk.js.map": "/financial-success-game/static/js/453.3eedbe03.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6867d2b3.css",
-    "static/js/main.fc6267b0.js"
+    "static/js/main.cf3e25aa.js"
   ]
 }
