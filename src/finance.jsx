@@ -488,7 +488,7 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="p-4" style={{padding: '1.1rem'}}>
             <div className="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-8 mt-10">
               <h2 className="font-bold text-center mb-8 text-gray-800 finance-title-lg">
                 בואו נכיר! 👋
