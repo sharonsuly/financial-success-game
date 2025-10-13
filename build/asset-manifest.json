@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/financial-success-game/static/css/main.6867d2b3.css",
-    "main.js": "/financial-success-game/static/js/main.cf3e25aa.js",
-    "static/js/453.3eedbe03.chunk.js": "/financial-success-game/static/js/453.3eedbe03.chunk.js",
-    "index.html": "/financial-success-game/index.html",
-    "main.6867d2b3.css.map": "/financial-success-game/static/css/main.6867d2b3.css.map",
-    "main.cf3e25aa.js.map": "/financial-success-game/static/js/main.cf3e25aa.js.map",
-    "453.3eedbe03.chunk.js.map": "/financial-success-game/static/js/453.3eedbe03.chunk.js.map"
+    "main.css": "/financial-success-game/build/static/css/main.6867d2b3.css",
+    "main.js": "/financial-success-game/build/static/js/main.75c5cd74.js",
+    "static/js/453.3eedbe03.chunk.js": "/financial-success-game/build/static/js/453.3eedbe03.chunk.js",
+    "index.html": "/financial-success-game/build/index.html",
+    "main.6867d2b3.css.map": "/financial-success-game/build/static/css/main.6867d2b3.css.map",
+    "main.75c5cd74.js.map": "/financial-success-game/build/static/js/main.75c5cd74.js.map",
+    "453.3eedbe03.chunk.js.map": "/financial-success-game/build/static/js/453.3eedbe03.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6867d2b3.css",
-    "static/js/main.cf3e25aa.js"
+    "static/js/main.75c5cd74.js"
   ]
 }
