@@ -425,8 +425,8 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-center items-center">
               <img
-                  src="/LiatFishelLogo.avif"
-                  alt="לוגו: ליאת פישל - כסף כן גדל על העצים - מאמנת לכלכלת המשפחה | חינוך פיננסי לנוער"
+                  src="../public/LiatFishelLeadershipLogo.jpg"
+                  alt="לוגו: מנהיגות כלכלית - כסף כן גדל על העצים - חינוך פיננסי | קבוצת ליאת פישל"
                   className="h-12 md:h-16" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
               />
             </div>
@@ -1498,8 +1498,8 @@ const FinancialSuccessGame = () => {
           <div className="bg-white shadow-md p-4 mt-8">
             <div className="max-w-6xl mx-auto flex justify-center items-center">
               <img
-                  src="/LiatFishelLogo.avif"
-                  alt="לוגו: ליאת פישל - כסף כן גדל על העצים - מאמנת לכלכלת המשפחה | חינוך פיננסי לנוער"
+                  src="../public/LiatFishelLeadershipLogo.jpg"
+                  alt="לוגו: מנהיגות כלכלית - כסף כן גדל על העצים - חינוך פיננסי | קבוצת ליאת פישל"
                   className="h-12 md:h-16" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
               />
             </div>
