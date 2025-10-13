@@ -1438,7 +1438,7 @@ code {
 }
 
 .finance-viewport {
-  min-height: calc(100vh - 100px);
+  height:100%;
 }
 
 .finance-title-xl {
