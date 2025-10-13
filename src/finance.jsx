@@ -424,9 +424,11 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-center items-center">
-              <div className="bg-white p-4 rounded-xl border-2 border-gray-200">
-                <p className="text-gray-600">לוגו מנהיגות כלכלית</p>
-              </div>
+              <img
+                  src="/LiatFishelLogo.avif"
+                  alt="לוגו: ליאת פישל - כסף כן גדל על העצים - מאמנת לכלכלת המשפחה | חינוך פיננסי לנוער"
+                  className="h-12 md:h-16" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
+              />
             </div>
           </div>
 
@@ -1495,9 +1497,11 @@ const FinancialSuccessGame = () => {
 
           <div className="bg-white shadow-md p-4 mt-8">
             <div className="max-w-6xl mx-auto flex justify-center items-center">
-              <div className="bg-white p-4 rounded-xl border-2 border-gray-200">
-                <p className="text-gray-600">לוגו מנהיגות כלכלית</p>
-              </div>
+              <img
+                  src="/LiatFishelLogo.avif"
+                  alt="לוגו: ליאת פישל - כסף כן גדל על העצים - מאמנת לכלכלת המשפחה | חינוך פיננסי לנוער"
+                  className="h-12 md:h-16" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
+              />
             </div>
           </div>
         </div>
