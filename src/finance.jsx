@@ -29,12 +29,12 @@ const FinancialSuccessGame = () => {
     { id: 'bike', name: 'אופניים', icon: '🚴', price: 2000, color: 'bg-blue-500' },
     { id: 'phone', name: 'פלאפון', icon: '📱', price: 4000, color: 'bg-purple-500' },
     { id: 'vacation', name: 'חופשה', icon: '✈️', price: 5000, color: 'bg-cyan-500' },
-    { id: 'car', name: 'רכב', icon: '🚗', price: 30000, color: 'bg-red-500' },
+    { id: 'car', name: 'רכב', icon: '🚗', price: 30000, color: 'bg-blue-400' },
     { id: 'room', name: 'עיצוב חדר', icon: '🛋️', price: 3000, color: 'bg-orange-500' },
     { id: 'personal', name: 'יעד אישי', icon: '🎯', price: 1000, color: 'bg-green-500' },
-    { id: 'license', name: 'רישיון נהיגה', icon: '🏆', price: 8000, color: 'bg-yellow-500' },
+    { id: 'license', name: 'רישיון נהיגה', icon: '🏆', price: 8000, color: 'bg-indigo-500' },
     { id: 'game', name: 'משחק', icon: '🎮', price: 500, color: 'bg-pink-500' },
-    { id: 'instrument', name: 'כלי נגינה', icon: '🎵', price: 2500, color: 'bg-indigo-500' },
+    { id: 'instrument', name: 'כלי נגינה', icon: '🎵', price: 2500, color: 'bg-pink-400' },
     { id: 'gift', name: 'מתנה', icon: '🎁', price: 600, color: 'bg-teal-500' }
   ];
 
@@ -50,7 +50,7 @@ const FinancialSuccessGame = () => {
     { id: 'babysitter', name: 'בייביסיטר', icon: '👶', amount: 30, unit: '₪ לשעה', timesPerWeek: 0, isCustom: false, color: 'bg-pink-500' },
     { id: 'tutoring', name: 'שיעורים פרטיים', icon: '📚', amount: 50, unit: '₪ לשיעור', timesPerWeek: 0, isCustom: false, color: 'bg-blue-500' },
     { id: 'carwash', name: 'שטיפת רכבים', icon: '🚗', amount: 50, unit: '₪ לרכב', timesPerWeek: 0, isCustom: false, color: 'bg-cyan-500' },
-    { id: 'bottles', name: 'איסוף בקבוקים', icon: '♻️', amount: 0.30, unit: "₪ לבקבוק", timesPerWeek: 0, isCustom: false, color: 'bg-green-500' },
+    { id: 'bottles', name: 'איסוף בקבוקים', icon: '♻️', amount: 0.30, unit: "₪ לבקבוק", timesPerWeek: 0, isCustom: false, color: 'bg-pink-400' },
     { id: 'dogsitter', name: 'דוגיסיטר', icon: '🐕', amount: 25, unit: '₪ לסיבוב', timesPerWeek: 0, isCustom: false, color: 'bg-yellow-500' },
     { id: 'petcare', name: 'טיפול בחיות והשקיית עציצים', icon: '🐾', amount: 100, unit: '₪ ליום', timesPerWeek: 0, isCustom: false, color: 'bg-teal-500' },
     { id: 'housework', name: 'עזרה בבית', icon: '🏠', amount: 10, unit: '₪ לפעולה', timesPerWeek: 0, isCustom: false, color: 'bg-indigo-500' },
@@ -422,7 +422,7 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'opening') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md p-4">
+          <div className="top-0 z-50 bg-white shadow-md p-4">
             <div className="max-w-6xl mx-auto flex justify-center items-center">
               <img
                   src={`./LiatFishelLeadershipLogo.jpg`}
@@ -432,7 +432,7 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center p-4 finance-viewport">
+          <div className="flex items-center justify-center main-content-padding finance-viewport">
             <div className="text-center max-w-2xl">
               <div className={`mb-8 ${showAnimation ? 'animate-pulse' : ''}`}>
                 <h1 className="font-bold text-white mb-4 drop-shadow-lg finance-title-xl">
@@ -475,20 +475,24 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'info') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md p-4">
+          <div className="sticky top-0 z-50 bg-white shadow-md main-content-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
               <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right mb-4 md:mb-0 px-2">פרטים אישיים</h2>
+              <div class="flex items-center justify-center h-full">
+                <h2 class="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right md:mb-0 px-2">
+                  פרטים אישיים
+                </h2>
+              </div>
               <button onClick={() => setIsMuted(!isMuted)} className="p-2">
                 {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
               </button>
             </div>
           </div>
 
-          <div className="p-4" style={{padding: '1.1rem'}}>
+          <div className="main-content-padding">
             <div className="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-8 mt-10">
               <h2 className="font-bold text-center mb-8 text-gray-800 finance-title-lg">
                 בואו נכיר! 👋
@@ -539,20 +543,20 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'goals') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md p-4">
+          <div className="sticky top-0 z-50 bg-white shadow-md main-content-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
               <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right mb-4 md:mb-0 px-2">שלב 1 - בחירת היעד שלך</h2>
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right md:mb-0 px-2">שלב 1 - בחירת היעד שלך</h2>
               <button onClick={() => setIsMuted(!isMuted)} className="p-2">
                 {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
               </button>
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="main-content-padding">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8 mt-8">
                 {goals.map((goal) => (
@@ -639,7 +643,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-4 p-4">
                 <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
@@ -673,7 +677,7 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="main-content-padding">
             <div className="max-w-6xl mx-auto">
               <div className="bg-white rounded-3xl p-6 mb-8 shadow-2xl">
                 <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
@@ -770,7 +774,7 @@ const FinancialSuccessGame = () => {
                           className="bg-red-500 rounded-3xl p-6 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transform transition-all duration-200 shadow-2xl hover:brightness-110"
                       >
                         <div className="text-6xl mb-3">➕</div>
-                        <h3 className="text-white font-bold text-lg">הוסף קטגוריה</h3>
+                        <h3 className="text-white font-bold text-lg text-center">הוסף קטגוריה</h3>
                       </div>
                   )}
                 </div>
@@ -800,7 +804,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-4 p-4">
                 <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
@@ -828,7 +832,7 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="main-content-padding">
             <div className="max-w-6xl mx-auto">
               <div className="bg-white rounded-3xl p-6 mb-8 shadow-2xl">
                 <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
@@ -939,7 +943,7 @@ const FinancialSuccessGame = () => {
                               >
                                 <Minus className="w-4 h-4" />
                               </button>
-                              <span className="text-xl font-bold text-white min-w-[40px]">
+                              <span className="text-xl font-bold text-white min-w-[40px] text-center">
                             {item.timesPerWeek}
                           </span>
                               <button
@@ -969,7 +973,7 @@ const FinancialSuccessGame = () => {
                           className="bg-red-500 rounded-3xl p-6 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transform transition-all duration-200 shadow-2xl hover:brightness-110 min-h-[320px]"
                       >
                         <div className="text-6xl mb-3">➕</div>
-                        <h3 className="text-white font-bold text-lg">הוסף קטגוריה</h3>
+                        <h3 className="text-white font-bold text-lg text-center" >הוסף קטגוריה</h3>
                       </div>
                   )}
                 </div>
@@ -1000,12 +1004,12 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-4 p-4">
                 <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
-                <div className="text-center w-full md:w-auto mb-4 md:mb-0 px-2">
+                <div className="text-center w-full md:w-auto md:mb-0 px-2">
                   <h2 className="text-lg md:text-xl font-bold text-gray-800">שלב 4 – הוצאות שבועיות</h2>
                 </div>
                 <button onClick={() => setIsMuted(!isMuted)} className="p-2">
@@ -1028,7 +1032,7 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="main-content-padding">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-3xl p-8 shadow-2xl">
                 <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
@@ -1151,20 +1155,20 @@ const FinancialSuccessGame = () => {
 
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md p-4">
+          <div className="sticky top-0 z-50 bg-white shadow-md p-4" style={{padding:'0.5rem'}}>
             <div className="max-w-6xl mx-auto flex justify-between items-center">
               <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right mb-4 md:mb-0 px-2">סיכום</h2>
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 text-center md:text-right md:mb-0 px-2">סיכום</h2>
               <button onClick={() => setIsMuted(!isMuted)} className="p-2">
                 {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
               </button>
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="main-content-padding">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <div className="text-8xl mb-4">{goalAchieved ? '🏆' : '💪'}</div>

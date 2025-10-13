@@ -598,7 +598,9 @@ video {
 .mt-10 {
   margin-top: 2.5rem;
 }
-
+.main-content-padding{
+  padding: 1rem;
+}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1125,7 +1127,7 @@ video {
 }
 
 .text-lg {
-  font-size: 1.125rem;
+  font-size: 0.9rem;
   line-height: 1.75rem;
 }
 
@@ -1240,6 +1242,9 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-center{
+  text-align: center;
 }
 
 .text-yellow-100 {
@@ -1442,7 +1447,7 @@ code {
 }
 
 .finance-title-xl {
-  font-size: 94px;
+  font-size: 75px;
 }
 
 .finance-title-lg {
