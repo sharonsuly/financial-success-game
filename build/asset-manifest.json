@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.00f1e06a.css",
-    "main.js": "/static/js/main.fec534aa.js",
-    "static/js/453.3eedbe03.chunk.js": "/static/js/453.3eedbe03.chunk.js",
-    "index.html": "/index.html",
-    "main.00f1e06a.css.map": "/static/css/main.00f1e06a.css.map",
-    "main.fec534aa.js.map": "/static/js/main.fec534aa.js.map",
-    "453.3eedbe03.chunk.js.map": "/static/js/453.3eedbe03.chunk.js.map"
+    "main.css": "/financial-success-game/static/css/main.00f1e06a.css",
+    "main.js": "/financial-success-game/static/js/main.c296d994.js",
+    "static/js/453.3eedbe03.chunk.js": "/financial-success-game/static/js/453.3eedbe03.chunk.js",
+    "index.html": "/financial-success-game/index.html",
+    "main.00f1e06a.css.map": "/financial-success-game/static/css/main.00f1e06a.css.map",
+    "main.c296d994.js.map": "/financial-success-game/static/js/main.c296d994.js.map",
+    "453.3eedbe03.chunk.js.map": "/financial-success-game/static/js/453.3eedbe03.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.00f1e06a.css",
-    "static/js/main.fec534aa.js"
+    "static/js/main.c296d994.js"
   ]
 }
