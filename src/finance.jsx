@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import {
   Star,
   ArrowRight,
@@ -9,6 +9,9 @@ import {
   VolumeX,
 } from 'react-feather';
 import './finance.css';
+import ExportContainer from './export/ExportContainer';
+import { createExportModel } from './export/exportModel';
+import { downloadPdf } from './export/pdfExport';
 
 const FinancialSuccessGame = () => {
   const [currentStage, setCurrentStage] = useState('opening');
@@ -73,11 +76,32 @@ const FinancialSuccessGame = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [customPassiveIncomeCounter, setCustomPassiveIncomeCounter] = useState(0);
   const [customActiveIncomeCounter, setCustomActiveIncomeCounter] = useState(0);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+  const [exportError, setExportError] = useState(null);
+  const exportContainerRef = useRef(null);
 
   const [goals, setGoals] = useState(defaultGoals);
 
   const expenseOptions = [30, 50, 100, 120, 200];
 
+  const exportModel = useMemo(
+      () => createExportModel({
+        studentInfo,
+        selectedGoal,
+        selectedPassiveIncomes,
+        selectedActiveIncomes,
+        selectedExpense,
+        otherExpenseAmount
+      }),
+      [
+        studentInfo,
+        selectedGoal,
+        selectedPassiveIncomes,
+        selectedActiveIncomes,
+        selectedExpense,
+        otherExpenseAmount
+      ]
+  );
   const playSound = (type) => {
     if (isMuted) return;
 
@@ -224,6 +248,47 @@ const FinancialSuccessGame = () => {
     return Math.ceil(remainingAfterOneTime / netWeekly);
   };
 
+  const handleDownloadPdf = useCallback(async () => {
+    if (isExportingPdf) {
+      return;
+    }
+    if (!exportModel || !exportModel.screens || exportModel.screens.length === 0) {
+      setExportError('אין נתונים זמינים לייצוא.');
+      return;
+    }
+    try {
+      setExportError(null);
+      setIsExportingPdf(true);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+
+      if (!exportContainerRef.current) {
+        throw new Error('Export container not ready');
+      }
+
+      const nameParts = [studentInfo.firstName, studentInfo.lastName]
+        .filter(Boolean)
+        .join('-');
+      const baseName = nameParts || 'financial-summary';
+      const safeName = baseName
+        .replace(/[^\w\-א-ת]+/g, '-')
+        .replace(/-{2,}/g, '-')
+        .replace(/^-|-$/g, '');
+
+      await downloadPdf({
+        container: exportContainerRef.current,
+        fileName: `${safeName || 'financial-summary'}.pdf`,
+        title: exportModel.meta?.title || 'תכנית ההצלחה הפיננסית שלי',
+        localeDate: exportModel.meta?.localeDate,
+      });
+    } catch (error) {
+      console.error('PDF generation failed', error);
+      setExportError('אירעה שגיאה ביצירת ה-PDF. נסו שוב או השתמשו ב-"Print to PDF" כגיבוי.');
+    } finally {
+      setIsExportingPdf(false);
+    }
+  }, [exportModel, studentInfo, setExportError, isExportingPdf]);
+
   const handlePassiveIncomeSelect = (income) => {
     const exists = selectedPassiveIncomes.find(i => i.id === income.id);
     if (exists) {
@@ -287,6 +352,8 @@ const FinancialSuccessGame = () => {
     setCustomExpense('');
     setCustomPassiveIncomeCounter(0);
     setCustomActiveIncomeCounter(0);
+    setExportError(null);
+    setIsExportingPdf(false);
 
     // החזרת ערכי ברירת מחדל מקוריים
     setGoals(JSON.parse(JSON.stringify(defaultGoals)));
@@ -462,7 +529,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('info');
                     setTimeout(() => playSound('start'), 0);
                   }}
-                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button "
               >
                 בואו נתחיל!
               </button>
@@ -1486,6 +1553,13 @@ const FinancialSuccessGame = () => {
 
               <div className="text-center space-y-4 mb-8">
                 <button
+                    onClick={handleDownloadPdf}
+                    disabled={isExportingPdf}
+                    className={`hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-secondary-button ${isExportingPdf ? 'opacity-70 cursor-wait' : ''}`}
+                >
+                  {isExportingPdf ? 'יוצר PDF…' : 'הורדת PDF'}
+                </button>
+                <button
                     onClick={() => {
                       playSound('start');
                       resetGame();
@@ -1495,6 +1569,11 @@ const FinancialSuccessGame = () => {
                   <RotateCcw className="w-6 h-6 inline ml-2" />
                   התחילו מחדש
                 </button>
+                {exportError && (
+                    <p className="text-red-200 font-semibold max-w-xl mx-auto">
+                      {exportError}
+                    </p>
+                )}
               </div>
             </div>
           </div>
@@ -1508,6 +1587,19 @@ const FinancialSuccessGame = () => {
               />
             </div>
           </div>
+          <ExportContainer
+              ref={exportContainerRef}
+              model={exportModel}
+              isVisible={isExportingPdf}
+          />
+          {isExportingPdf && (
+              <div className="pdf-export-overlay" role="status" aria-live="polite">
+                <div className="pdf-export-spinner">
+                  <span className="pdf-export-spinner__icon" />
+                  <p>מייצר PDF...</p>
+                </div>
+              </div>
+          )}
         </div>
     );
   }
