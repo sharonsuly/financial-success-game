@@ -1153,6 +1153,9 @@ const FinancialSuccessGame = () => {
       savingsDurationYears = Math.round(savingsDurationWeeks / 52);
     }
 
+    const studentFullName = [studentInfo.firstName, studentInfo.lastName].filter(Boolean).join(' ').trim() || '—';
+    const goalPriceText = `${selectedGoal.price.toLocaleString()} ₪`;
+
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4" style={{padding:'0.5rem'}}>
@@ -1172,11 +1175,14 @@ const FinancialSuccessGame = () => {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <div className="text-8xl mb-4"></div>
-                <h2 className="font-bold text-white mb-4 drop-shadow-lg finance-title-end-screen">
+                <h2 className="font-bold text-white mb-4 drop-shadow-lg text-4xl">
                   {goalAchieved ? '🏆' : '💪'}                   כל הכבוד!
                 </h2>
                 <p className="text-yellow-300 font-semibold drop-shadow finance-title-sm">
                   {goalAchieved ? 'יצרת את תכנית ההצלחה להשגת היעד הכלכלי שלך' : 'עשית צעד חשוב קדימה'}
+                </p>
+                <p className="text-white font-semibold drop-shadow finance-title-sm">
+                  שם: {studentFullName} | היעד: {selectedGoal.name} {goalPriceText}
                 </p>
                 {!goalAchieved && (
                     <p className="text-yellow-200 font-semibold drop-shadow mt-2 finance-title-md">
@@ -1189,21 +1195,32 @@ const FinancialSuccessGame = () => {
               <div className="bg-white rounded-3xl p-8 shadow-2xl mb-8">
                 {goalAchieved && weeklyBalance >= 0 && (
                     <div className="text-center space-y-4">
-                      <h3 className="text-4xl font-bold text-green-600 mb-6">🎉 מזל טוב! הגעת ליעד שלך!</h3>
+                      <h3 className="text-xl font-bold text-green-600 mb-3">🎉 מזל טוב! הגעת ליעד שלך!</h3>
                       <div className="bg-green-50 rounded-2xl p-6 text-right space-y-3">
-                        <p className="text-2xl font-bold text-green-700">
-                          {selectedGoal.icon} יש לך מספיק כסף כדי לקנות את {selectedGoal.name}
+                        <p className="text-lg font-bold text-green-700">
+                          {selectedGoal.icon} יש לך מספיק כסף כדי לקנות {selectedGoal.name}
                         </p>
-                        <p className="text-xl text-green-600">
+                        <p className="text-lg text-green-600">
                           💰 יתרת חיסכון לאחר הקנייה: {remainingSavings.toLocaleString()} ₪
                         </p>
-                        <p className="text-xl text-green-600">
+                        <p className="text-lg text-green-600">
                           ✅ רווח שבועי: {weeklyBalance.toLocaleString()}{weeklyBalance > 0 ? '+ ' : ' '}₪
                         </p>
-                        <p className="text-lg text-gray-700">
-                          תמשיך לצבור חיסכון! כך תוכל להמשיך ליהנות מהעודפים שלך לאורך זמן 🌟
-                        </p>
+                        {weeksNeeded > 0 && (
+                            <div className="">
+                              <h4 className="text-lg text-green-700">
+                                ⏱️ זמן הגעה ליעד <span className="font-bold">{weeksNeeded} {weeksNeeded === 1 ? 'שבוע' : 'שבועות'}</span>
+                              </h4>
+                              
+                                
+                              
+                              <p className="text-lg text-green-700">
+                                בהנחה שתפעל על פי תכנית זו ! 🎯
+                              </p>
+                            </div>
+                        )}
                       </div>
+                      
                     </div>
                 )}
 
@@ -1261,40 +1278,8 @@ const FinancialSuccessGame = () => {
 
               {goalAchieved && (
                   <div className="bg-white rounded-3xl p-8 shadow-2xl mb-8">
-                    <h3 className="font-bold text-center mb-6 text-gray-800 finance-title-lg">
-                      📋 תכנית ההצלחה שלך
-                    </h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      <div className="text-center p-6 bg-blue-50 rounded-2xl">
-                        <h4 className="text-xl font-bold mb-3 text-blue-800">פרטי השחקן</h4>
-                        <p className="text-lg mb-1">{studentInfo.firstName} {studentInfo.lastName}</p>
-                        <p className="text-base text-gray-600">{studentInfo.school}</p>
-                        {studentInfo.phone && <p className="text-base text-gray-600">{studentInfo.phone}</p>}
-                      </div>
-
-                      <div className="text-center p-6 bg-green-50 rounded-2xl">
-                        <h4 className="text-xl font-bold mb-3 text-green-800">היעד שהשגת</h4>
-                        <div className="text-5xl mb-2">{selectedGoal.icon}</div>
-                        <p className="text-lg font-bold">{selectedGoal.name}</p>
-                        <p className="text-base text-gray-600">{selectedGoal.price.toLocaleString()} ₪</p>
-                      </div>
-                    </div>
-
-                    {weeksNeeded > 0 && (
-                        <div className="bg-purple-50 rounded-2xl p-6 mb-6 text-center">
-                          <h4 className="text-2xl font-bold mb-3 text-purple-800">⏱️ זמן הגעה ליעד</h4>
-                          <p className="text-3xl font-bold text-purple-600 mb-2">
-                            {weeksNeeded} {weeksNeeded === 1 ? 'שבוע' : 'שבועות'}
-                          </p>
-                          <p className="text-lg text-gray-700">
-                            בהנחה שתפעל על פי תכנית זו, תגיע ליעד תוך {weeksNeeded} {weeksNeeded === 1 ? 'שבוע' : 'שבועות'}! 🎯
-                          </p>
-                        </div>
-                    )}
-
                     {/* פירוט הכנסות והוצאות */}
-                    <div className="bg-gray-50 rounded-2xl p-6 mb-6">
+                    
                       <h4 className="text-2xl font-bold text-center mb-6 text-gray-800">
                         📊 פירוט הכנסות והוצאות
                       </h4>
@@ -1302,7 +1287,7 @@ const FinancialSuccessGame = () => {
                       <div className="space-y-6 text-right">
                         {/* הכנסות פסיביות */}
                         <div className="bg-green-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-green-700">💰 הכנסות פסיביות (שנתיות):</h5>
+                          <h5 className="text-lg font-bold mb-4 text-green-700">💰 הכנסות פסיביות (שנתיות):</h5>
                           {selectedPassiveIncomes.filter(i => i.isOneTime).length > 0 ? (
                               <>
                                 {selectedPassiveIncomes.filter(i => i.isOneTime).map((income) => (
@@ -1310,7 +1295,7 @@ const FinancialSuccessGame = () => {
                                       • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
                                     </p>
                                 ))}
-                                <p className="font-bold text-green-600 text-xl mt-3 pt-3 border-t-2 border-green-200">
+                                <p className="font-bold text-green-600 text-lg mt-3 pt-3 border-t-2 border-green-200">
                                   סה״כ: {oneTimeIncome.toLocaleString()} ₪
                                 </p>
                               </>
@@ -1321,7 +1306,7 @@ const FinancialSuccessGame = () => {
 
                         {/* הכנסות שבועיות */}
                         <div className="bg-blue-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-blue-700">📊 הכנסות שבועיות:</h5>
+                          <h5 className="text-lg font-bold mb-4 text-blue-700">📊 הכנסות שבועיות:</h5>
                           {selectedPassiveIncomes.filter(i => !i.isOneTime).length > 0 || selectedActiveIncomes.length > 0 ? (
                               <>
                                 {selectedPassiveIncomes.filter(i => !i.isOneTime).map((income) => (
@@ -1334,7 +1319,7 @@ const FinancialSuccessGame = () => {
                                       • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪ × {income.timesPerWeek} פעמים = {(income.amount * income.timesPerWeek).toLocaleString()} ₪
                                     </p>
                                 ))}
-                                <p className="font-bold text-blue-600 text-xl mt-3 pt-3 border-t-2 border-blue-200">
+                                <p className="font-bold text-blue-600 text-lg mt-3 pt-3 border-t-2 border-blue-200">
                                   סה״כ: {weeklyIncome.toLocaleString()} ₪ בשבוע
                                 </p>
                               </>
@@ -1345,23 +1330,23 @@ const FinancialSuccessGame = () => {
 
                         {/* הוצאות */}
                         <div className="bg-red-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
+                          <h5 className="text-lg font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
                           <p className="text-gray-700 text-lg mb-2">
                             • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
                           </p>
-                          <p className="font-bold text-red-600 text-xl mt-3 pt-3 border-t-2 border-red-200">
+                          <p className="font-bold text-red-600 text-lg mt-3 pt-3 border-t-2 border-red-200">
                             סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
                           </p>
                         </div>
 
                         {/* מאזן שבועי */}
                         <div className={`${weeklyBalance >= 0 ? 'bg-green-100' : 'bg-orange-100'} rounded-2xl p-6`}>
-                          <p className={`font-bold text-2xl ${weeklyBalance >= 0 ? 'text-green-700' : 'text-orange-700'}`}>
+                          <p className={`font-bold text-lg ${weeklyBalance >= 0 ? 'text-green-700' : 'text-orange-700'}`}>
                             {weeklyBalance >= 0 ? '✅' : '⚠️'} מאזן שבועי: {Math.abs(weeklyBalance).toLocaleString()}{weeklyBalance > 0 ? '+ ' : weeklyBalance < 0 ? '- ' : ' '}₪
                           </p>
                           {weeklyBalance >= 0 ? (
                               <p className="text-green-600 text-lg mt-2">
-                                🌟 ההכנסות שלך גבוהות מההוצאות — החיסכון שלך לא ייגמר!
+                                🌟 ההכנסות שלך גבוהות מההוצאות
                               </p>
                           ) : (
                               <p className="text-orange-600 text-lg mt-2">
@@ -1370,17 +1355,17 @@ const FinancialSuccessGame = () => {
                           )}
                         </div>
                       </div>
-                    </div>
-
+                    
                     <div className="bg-blue-50 rounded-2xl p-6">
-                      <p className="text-xl font-bold text-center text-blue-800 mb-4">
-                        💪 כל מה שנותר לך כעת זה לפעול!
+                      
+                      <p className="text-lg font-bold text-center text-blue-800 mb-4">
+                        💪 מה עכשיו? הזמן לפעול!
                       </p>
-                      <div className="text-base space-y-2 text-right">
+                      <div className="text-lg space-y-2 text-right">
                         <p>1️⃣ להשיג את העבודות (מומלץ להתייעץ עם המשפחה, לרתום את הסביבה)</p>
                         <p>2️⃣ ניהול זמן נכון (תוך שמירה על איזון עם הלימודים ושיעורי הבית)</p>
                       </div>
-                      <p className="text-xl font-bold text-center text-blue-600 mt-4">בהצלחה! 🎉</p>
+                      <p className="text-lg font-bold text-center text-blue-600 mt-4">בהצלחה! 🎉</p>
                     </div>
                   </div>
               )}
@@ -1412,7 +1397,7 @@ const FinancialSuccessGame = () => {
                       <div className="space-y-6 text-right">
                         {/* הכנסות פסיביות */}
                         <div className="bg-green-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-green-700">💰 הכנסות פסיביות (שנתיות):</h5>
+                          <h5 className="text-lg font-bold mb-4 text-green-700">💰 הכנסות פסיביות (שנתיות):</h5>
                           {selectedPassiveIncomes.filter(i => i.isOneTime).length > 0 ? (
                               <>
                                 {selectedPassiveIncomes.filter(i => i.isOneTime).map((income) => (
@@ -1420,7 +1405,7 @@ const FinancialSuccessGame = () => {
                                       • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
                                     </p>
                                 ))}
-                                <p className="font-bold text-green-600 text-xl mt-3 pt-3 border-t-2 border-green-200">
+                                <p className="font-bold text-green-600 text-lg mt-3 pt-3 border-t-2 border-green-200">
                                   סה״כ: {oneTimeIncome.toLocaleString()} ₪
                                 </p>
                               </>
@@ -1444,7 +1429,7 @@ const FinancialSuccessGame = () => {
                                       • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪ × {income.timesPerWeek} פעמים = {(income.amount * income.timesPerWeek).toLocaleString()} ₪
                                     </p>
                                 ))}
-                                <p className="font-bold text-blue-600 text-xl mt-3 pt-3 border-t-2 border-blue-200">
+                                <p className="font-bold text-blue-600 text-lg mt-3 pt-3 border-t-2 border-blue-200">
                                   סה״כ: {weeklyIncome.toLocaleString()} ₪ בשבוע
                                 </p>
                               </>
@@ -1455,11 +1440,11 @@ const FinancialSuccessGame = () => {
 
                         {/* הוצאות */}
                         <div className="bg-red-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
+                          <h5 className="text-lg font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
                           <p className="text-gray-700 text-lg mb-2">
                             • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
                           </p>
-                          <p className="font-bold text-red-600 text-xl mt-3 pt-3 border-t-2 border-red-200">
+                          <p className="font-bold text-red-600 text-lg mt-3 pt-3 border-t-2 border-red-200">
                             סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
                           </p>
                         </div>
@@ -1471,7 +1456,7 @@ const FinancialSuccessGame = () => {
                           </p>
                           {weeklyBalance >= 0 ? (
                               <p className="text-green-600 text-lg mt-2">
-                                🌟 ההכנסות שלך גבוהות מההוצאות — החיסכון שלך לא ייגמר!
+                                🌟 ההכנסות שלך גבוהות מההוצאות
                               </p>
                           ) : (
                               <p className="text-orange-600 text-lg mt-2">
