@@ -28,12 +28,12 @@ const FinancialSuccessGame = () => {
   const defaultGoals = [
     { id: 'bike', name: 'אופניים', icon: '🚴', price: 2000, color: 'bg-blue-500' },
     { id: 'phone', name: 'פלאפון', icon: '📱', price: 4000, color: 'bg-purple-500' },
-    { id: 'vacation', name: 'חופשה', icon: '✈️', price: 5000, color: 'bg-cyan-500' },
+    { id: 'vacation', name: 'חופשה', icon: '✈️', price: 5000, color: 'bg-red-500' },
     { id: 'car', name: 'רכב', icon: '🚗', price: 30000, color: 'bg-blue-400' },
     { id: 'room', name: 'עיצוב חדר', icon: '🛋️', price: 3000, color: 'bg-orange-500' },
     { id: 'personal', name: 'יעד אישי', icon: '🎯', price: 1000, color: 'bg-green-500' },
     { id: 'license', name: 'רישיון נהיגה', icon: '🏆', price: 8000, color: 'bg-indigo-500' },
-    { id: 'game', name: 'משחק', icon: '🎮', price: 500, color: 'bg-pink-500' },
+    { id: 'game', name: 'משחק', icon: '🎮', price: 500, color: 'bg-yellow-600' },
     { id: 'instrument', name: 'כלי נגינה', icon: '🎵', price: 2500, color: 'bg-pink-400' },
     { id: 'gift', name: 'מתנה', icon: '🎁', price: 600, color: 'bg-teal-500' }
   ];
@@ -42,7 +42,7 @@ const FinancialSuccessGame = () => {
     { id: 'birthday', name: 'מתנת יום הולדת', icon: '🎂', amount: 200, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-pink-500' },
     { id: 'allowance', name: 'דמי כיס', icon: '💰', amount: 100, unit: '₪', isOneTime: false, isCustom: false, color: 'bg-green-500' },
     { id: 'holidays', name: 'דמי חגים', icon: '🎉', amount: 300, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-purple-500' },
-    { id: 'grandparents', name: 'כסף סבא/סבתא', icon: '👴', amount: 100, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-orange-500' },
+    { id: 'grandparents', name: 'כסף סבא/סבתא', icon: '👴👵', amount: 100, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-orange-500' },
     { id: 'other_passive', name: 'אחר', icon: '❓', amount: 0, unit: '₪', isOneTime: true, isCustom: true, color: 'bg-indigo-600' }
   ];
 
@@ -447,7 +447,7 @@ const FinancialSuccessGame = () => {
                 {[...Array(5)].map((_, i) => (
                     <Star
                         key={i}
-                        className="w-8 h-8 text-white animate-bounce"
+                        className="w-8 h-8 text-yellow-400  animate-bounce"
                         style={{ animationDelay: `${i * 0.2}s` }}
                     />
                 ))}
@@ -530,7 +530,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('goals');
                   }}
                   disabled={!studentInfo.firstName || !studentInfo.lastName}
-                  className={`w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 finance-cta-button ${!studentInfo.firstName || !studentInfo.lastName ? 'finance-disabled-button' : 'finance-primary-button'}`}
+                  className={`w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 finance-cta-button ${!studentInfo.firstName || !studentInfo.lastName ? 'finance-disabled-button' : 'bg-yellow-600'}`}
               >
                 המשך לבחירת יעד
               </button>
@@ -623,7 +623,7 @@ const FinancialSuccessGame = () => {
                           playSound('continue');
                           setCurrentStage('passive income');
                         }}
-                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
                     >
                       בואו נתחיל לחשב!
                     </button>
@@ -696,7 +696,7 @@ const FinancialSuccessGame = () => {
                             }}
                             className={`${item.color} ${isSelected ? 'ring-4 ring-yellow-400 brightness-110' : ''} rounded-3xl p-6 text-center ${(!editingIncome || !editingIncome.startsWith(item.id)) ? 'cursor-pointer hover:scale-105' : ''} transform transition-all duration-200 shadow-2xl`}
                         >
-                          <div className="text-5xl mb-3">{item.icon}</div>
+                          <div className="text-4xl mb-3">{item.icon}</div>
                           <div className="mb-2">
                             {item.isCustom && editingIncome === `${item.id}-name` ? (
                                 <input
@@ -786,7 +786,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('active income');
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
                 >
                   המשך להכנסות אקטיביות
                 </button>
@@ -985,7 +985,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('expenses');
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
                 >
                   המשך להוצאות
                 </button>
@@ -1104,7 +1104,7 @@ const FinancialSuccessGame = () => {
                         setCurrentStage('summary');
                       }}
                       disabled={!selectedExpense}
-                      className={`hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button ${selectedExpense ? 'finance-primary-button' : 'finance-disabled-button'}`}
+                      className={`hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button ${selectedExpense ? 'bg-yellow-600' : 'finance-disabled-button'}`}
                   >
                     סיום המשחק
                   </button>
@@ -1356,7 +1356,7 @@ const FinancialSuccessGame = () => {
                         </div>
                       </div>
                     
-                    <div className="bg-blue-50 rounded-2xl p-6">
+                    <div className="bg-blue-50 rounded-2xl p-6 mt-6">
                       
                       <p className="text-lg font-bold text-center text-blue-800 mb-4">
                         💪 מה עכשיו? הזמן לפעול!
@@ -1475,7 +1475,7 @@ const FinancialSuccessGame = () => {
                       playSound('start');
                       resetGame();
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
                 >
                   <RotateCcw className="w-6 h-6 inline ml-2" />
                   התחילו מחדש
