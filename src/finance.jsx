@@ -430,10 +430,10 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'opening') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="top-0 z-50 bg-white shadow-md p-4">
-            <div className="max-w-6xl mx-auto flex justify-center items-center">
+          <div className="top-0 z-50   p-4">
+            <div className="max-w-6xl m-4 mx-auto flex justify-center items-center">
               <img
-                  src={`./LiatFishelLeadershipLogo.jpg`}
+                  src={`./LiatFishelLeadershipLogoRounded.png`}
                   alt="לוגו: מנהיגות כלכלית - כסף כן גדל על העצים - חינוך פיננסי | קבוצת ליאת פישל"
                   className="h-40" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
               />
@@ -483,9 +483,9 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'info') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md main-content-padding">
+          <div className="sticky top-0 z-50 bg-white shadow-md top-bar-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -530,6 +530,11 @@ const FinancialSuccessGame = () => {
                     onChange={(e) => setStudentInfo({...studentInfo, school: e.target.value})}
                     className="w-full p-4 border-2 border-gray-300 rounded-xl text-right focus:border-blue-500 focus:outline-none text-lg"
                 />
+                <p className="text-gray-700 text-center text-sm mb-2">
+                  ©️ הובהר כי הזכויות למשחק זה ולחומרים המועברים בביה"ס הינן שמורות לליאת פישל, מפתחת "תכנית חינוך פיננסי לילדים ולנוער"
+                  .אין לשכפל, להעתיק, לצלם, לתרגם, להעלות לאינטרנט ו/או להפיץ כל חלק שהוא מהחומרים שבתוכנית זו,  אלא ברשות מפורשת בכתב  שתינתן ע"י ליאת פישל
+                  ,כמו כן כל שימוש מסחרי מכל סוג שהוא בחומרים הכלולים בתוכנית זו אסור בהחלט.
+                </p>
               </div>
 
               <button
@@ -543,6 +548,7 @@ const FinancialSuccessGame = () => {
                 המשך לבחירת יעד
               </button>
             </div>
+
           </div>
         </div>
     );
@@ -551,9 +557,9 @@ const FinancialSuccessGame = () => {
   if (currentStage === 'goals') {
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
-          <div className="sticky top-0 z-50 bg-white shadow-md main-content-padding">
+          <div className="sticky top-0 z-50 bg-white shadow-md top-bar-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -620,8 +626,9 @@ const FinancialSuccessGame = () => {
                     <h3 className="font-bold text-gray-800 mb-2 finance-title-lg">
                       היעד שלי:
                     </h3>
-                    <p className="text-2xl font-bold text-blue-600 mb-4">
-                      {selectedGoal.name} - {selectedGoal.price.toLocaleString()} ₪
+                    <p className="text-2xl font-bold text-blue-600 mb-4 flex items-center justify-center gap-2">
+                      {selectedGoal.icon && <span className="text-3xl">{selectedGoal.icon}</span>}
+                      <span>{selectedGoal.name}</span> - {selectedGoal.price.toLocaleString()} ₪
                     </p>
                     <p className="text-xl text-gray-600 mb-6">
                       מוכנים? עכשיו נתחיל לפעול כדי להשיג את זה! 💪
@@ -652,12 +659,12 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4 p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
                 <div className="text-center w-full md:w-auto mb-4 md:mb-0 px-2">
-                  <h2 className="text-lg md:text-xl font-bold text-gray-800">שלב 2 – הכנסות פסיביות במהלך השנה</h2>
+                  <h2 className="text-lg md:text-xl font-bold text-center text-gray-800">שלב 2 – הכנסות פסיביות במהלך השנה</h2>
                 </div>
                 <button onClick={() => setIsMuted(!isMuted)} className="p-2">
                   {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
@@ -813,7 +820,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4 p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -1013,7 +1020,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4 p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -1168,7 +1175,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4" style={{padding:'0.5rem'}}>
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 finance-back-button">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -1187,15 +1194,17 @@ const FinancialSuccessGame = () => {
                   {goalAchieved ? '🏆' : '💪'}                   כל הכבוד!
                 </h2>
                 <p className="text-yellow-300 font-semibold drop-shadow finance-title-sm">
-                  {goalAchieved ? 'יצרת את תכנית ההצלחה להשגת היעד הכלכלי שלך' : 'עשית צעד חשוב קדימה'}
+                  {goalAchieved ? 'יצרת את תכנית ההצלחה להשגת היעד הכלכלי שלך' : 'עשית צעד חשוב קדימה 👣'}
                 </p>
                 <p className="text-white font-semibold drop-shadow finance-title-sm">
                   שם: {studentFullName} | היעד: {selectedGoal.name} {goalPriceText}
                 </p>
                 {!goalAchieved && (
-                    <p className="text-yellow-200 font-semibold drop-shadow mt-2 text-xl">
-                      חזרו לתקן את התכנית כדי להגיע ליעד
+                    <p className="text-yellow-300 font-semibold drop-shadow mt-2 text-xl">
+                      חזרו לתקן את התכנית כדי להגיע ליעד.
+                      <h3 className="text-xl font-bold text-yellow-300 mb-6"> היעד עדיין לא הושג😕</h3>
                     </p>
+
                 )}
               </div>
 
@@ -1263,20 +1272,24 @@ const FinancialSuccessGame = () => {
 
                 {!goalAchieved && (
                     <div className="text-center space-y-4">
-                      <h3 className="text-xl font-bold text-orange-600 mb-6">❗ היעד עדיין לא הושג</h3>
+
                       <div className="bg-orange-50 rounded-2xl p-6 text-right space-y-3">
+                        <h3 className="text-xl text-center font-bold text-orange-600 mb-6"> לא נורא! אפשר לתקן. 😀</h3>
                         <p className="text-lg text-orange-700 font-semibold">
-                          💡 המשך לחסוך ולעקוב אחרי ההוצאות וההכנסות כדי להגיע אליו!
+                           מה עושים? מגלים מנהיגות. עושים. טועים. מתקנים.
+                        </p>
+                        <p className="text-lg text-orange-700 font-semibold">
+                          💡 טיפים להצלחה
                         </p>
                         <div className="bg-white rounded-xl p-4 mt-3">
                           <p className="text-lg text-gray-700">
-                            ✅ הקטן את ההוצאות השבועיות
+                            ✅ הקטן את ההוצאות
                           </p>
                           <p className="text-lg text-gray-700">
-                            ✅ הגדל את ההכנסות השבועיות
+                            ✅ הגדל את ההכנסות
                           </p>
                           <p className="text-lg text-gray-700">
-                            ✅ או שניהם ביחד!
+                            ✅ או שניהם יחד!
                           </p>
                         </div>
                       </div>
@@ -1342,7 +1355,7 @@ const FinancialSuccessGame = () => {
                           <p className="text-gray-700 text-lg mb-2">
                             • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
                           </p>
-                          <p className="font-bold text-red-600 text-lg mt-3 pt-3 border-t-2 border-red-200">
+                          <p className="font-bold text-red-700 text-lg mt-3 pt-3 border-t-2 border-red-200">
                             סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
                           </p>
                         </div>
@@ -1437,7 +1450,7 @@ const FinancialSuccessGame = () => {
                           <p className="text-gray-700 text-lg mb-2">
                             • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
                           </p>
-                          <p className="font-bold text-red-600 text-lg mt-3 pt-3 border-t-2 border-red-200">
+                          <p className="font-bold text-red-700 text-lg mt-3 pt-3 border-t-2 border-red-200">
                             סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
                           </p>
                         </div>
@@ -1476,10 +1489,10 @@ const FinancialSuccessGame = () => {
             </div>
           </div>
 
-          <div className="bg-white shadow-md p-4 mt-8">
-            <div className="max-w-6xl mx-auto flex justify-center items-center">
+          <div className="shadow-md p-4 mt-8">
+            <div className=" mb-5 max-w-6xl mx-auto flex justify-center items-center">
               <img
-                  src={`./LiatFishelLeadershipLogo.jpg`}
+                  src={`./LiatFishelLeadershipLogoRounded.png`}
                   alt="לוגו: מנהיגות כלכלית - כסף כן גדל על העצים - חינוך פיננסי | קבוצת ליאת פישל"
                   className="h-40" // ניתן לשנות את הגודל כאן באמצעות Tailwind CSS
               />
