@@ -444,7 +444,7 @@ const FinancialSuccessGame = () => {
             <div className="text-center max-w-2xl">
               <div className={`mb-8 ${showAnimation ? 'animate-pulse' : ''}`}>
                 <h1 className="font-bold text-white mb-12 drop-shadow-lg text-5xl">
-                  🏃‍♂                  המרוץ ליעד️🏃‍♀️
+                  🏃‍♂המרוץ ליעד️🏃‍♀️
                 </h1>
                 <h2 className="text-white mb-4 drop-shadow-lg finance-title-lg">
                   תכנית ההצלחה הכלכלית שלך
@@ -658,12 +658,12 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
-              <div className="flex justify-between items-center mb-4 p-4">
+              <div className="flex justify-between items-center p-4">
                 <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
-                <div className="text-center w-full md:w-auto mb-4 md:mb-0 px-2">
+                <div className="text-center w-full md:w-auto md:mb-0 px-2">
                   <h2 className="text-lg md:text-xl font-bold text-center text-gray-800">שלב 2 – הכנסות פסיביות במהלך השנה</h2>
                 </div>
                 <button onClick={() => setIsMuted(!isMuted)} className="p-2">
@@ -824,7 +824,7 @@ const FinancialSuccessGame = () => {
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
-                <div className="text-center w-full md:w-auto mb-4 md:mb-0 px-2">
+                <div className="text-center w-full md:w-auto md:mb-0 px-2">
                   <h2 className="text-lg md:text-xl font-bold text-gray-800">שלב 3 – הכנסות אקטיביות שבועיות</h2>
                 </div>
                 <button onClick={() => setIsMuted(!isMuted)} className="p-2">
@@ -1169,7 +1169,9 @@ const FinancialSuccessGame = () => {
     }
 
     const studentFullName = [studentInfo.firstName, studentInfo.lastName].filter(Boolean).join(' ').trim() || '—';
-    const goalPriceText = `${selectedGoal.price.toLocaleString()} ₪`;
+    const goalPriceText = `₪${selectedGoal.price.toLocaleString()}`;
+    const formattedWeeklyProfit = `${weeklyBalance > 0 ? '+' : ''}₪${weeklyBalance.toLocaleString()}`;
+    const formattedWeeklyBalance = `${weeklyBalance > 0 ? '+' : weeklyBalance < 0 ? '-' : ''}₪${Math.abs(weeklyBalance).toLocaleString()}`;
 
     return (
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
@@ -1218,10 +1220,10 @@ const FinancialSuccessGame = () => {
                           {selectedGoal.icon} יש לך מספיק כסף כדי לקנות {selectedGoal.name}
                         </p>
                         <p className="text-lg text-green-600">
-                          💰 יתרת חיסכון לאחר הקנייה: {remainingSavings.toLocaleString()} ₪
+                          💰 יתרת חיסכון לאחר הקנייה: ₪{remainingSavings.toLocaleString()}
                         </p>
                         <p className="text-lg text-green-600">
-                          ✅ רווח שבועי: {weeklyBalance.toLocaleString()}{weeklyBalance > 0 ? '+ ' : ' '}₪
+                          ✅ רווח שבועי: {formattedWeeklyProfit}
                         </p>
                         {weeksNeeded > 0 && (
                             <div className="">
@@ -1249,11 +1251,11 @@ const FinancialSuccessGame = () => {
                           {selectedGoal.icon} יש לך מספיק כסף כדי לקנות את {selectedGoal.name}
                         </p>
                         <p className="text-xl text-green-600">
-                          💰 יתרת חיסכון לאחר הקנייה: {remainingSavings.toLocaleString()} ₪
+                          💰 יתרת חיסכון לאחר הקנייה: ₪{remainingSavings.toLocaleString()}
                         </p>
                         <div className="border-t-2 border-yellow-300 pt-4">
                           <p className="text-xl font-bold text-orange-600 mb-2">
-                            ⚠️ גירעון שבועי: {Math.abs(weeklyBalance).toLocaleString()}- ₪
+                            ⚠️ גירעון שבועי: {formattedWeeklyBalance}
                           </p>
                           {remainingSavings > 0 && (
                               <p className="text-lg text-gray-700 mb-3">
