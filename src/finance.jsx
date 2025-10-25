@@ -40,9 +40,9 @@ const FinancialSuccessGame = () => {
 
   const defaultPassiveIncomes = [
     { id: 'birthday', name: 'מתנת יום הולדת', icon: '🎂', amount: 200, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-pink-500' },
-    { id: 'allowance', name: 'דמי כיס', icon: '💰', amount: 100, unit: '₪', isOneTime: false, isCustom: false, color: 'bg-green-500' },
+    { id: 'allowance', name: 'דמי כיס', icon: '💰', amount: 100, unit: '₪', isOneTime: false, period: 'weekly', isCustom: false, color: 'bg-green-500' },
     { id: 'holidays', name: 'דמי חגים', icon: '🎉', amount: 300, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-purple-500' },
-    { id: 'grandparents', name: 'כסף סבא/סבתא', icon: '👴👵', amount: 100, unit: '₪', isOneTime: true, isCustom: false, color: 'bg-orange-500' },
+    { id: 'grandparents', name: 'כסף סבא/סבתא', icon: '👴👵', amount: 100, unit: '₪', isOneTime: false, period: 'monthly', isCustom: false, color: 'bg-orange-500' },
     { id: 'other_passive', name: 'אחר', icon: '❓', amount: 0, unit: '₪', isOneTime: true, isCustom: true, color: 'bg-indigo-600' }
   ];
 
@@ -185,6 +185,14 @@ const FinancialSuccessGame = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentStage]);
 
+  const getPassiveIncomeWeeklyValue = (income) => {
+    if (income.isOneTime) return 0;
+    if (income.period === 'monthly') {
+      return income.amount / 4;
+    }
+    return income.amount;
+  };
+
   const calculateOneTimeIncome = () => {
     return selectedPassiveIncomes
         .filter(income => income.isOneTime)
@@ -194,7 +202,7 @@ const FinancialSuccessGame = () => {
   const calculateWeeklyPassiveIncome = () => {
     return selectedPassiveIncomes
         .filter(income => !income.isOneTime)
-        .reduce((sum, income) => sum + income.amount, 0);
+        .reduce((sum, income) => sum + getPassiveIncomeWeeklyValue(income), 0);
   };
 
   const calculateWeeklyActiveIncome = () => {
@@ -435,8 +443,8 @@ const FinancialSuccessGame = () => {
           <div className="flex items-center justify-center main-content-padding finance-viewport">
             <div className="text-center max-w-2xl">
               <div className={`mb-8 ${showAnimation ? 'animate-pulse' : ''}`}>
-                <h1 className="font-bold text-white mb-4 drop-shadow-lg finance-title-xl">
-                  המרוץ ליעד
+                <h1 className="font-bold text-white mb-12 drop-shadow-lg text-5xl">
+                  🏃‍♂                  המרוץ ליעד️🏃‍♀️
                 </h1>
                 <h2 className="text-white mb-4 drop-shadow-lg finance-title-lg">
                   תכנית ההצלחה הכלכלית שלך
@@ -762,7 +770,7 @@ const FinancialSuccessGame = () => {
                             )}
                           </div>
                           <span className="text-xs text-yellow-100">
-                        {item.isOneTime ? 'שנתי' : 'שבועי'}
+                        {item.isOneTime ? 'שנתי' : item.period === 'monthly' ? 'חודשי' : 'שבועי'}
                       </span>
                         </div>
                     );
@@ -1185,7 +1193,7 @@ const FinancialSuccessGame = () => {
                   שם: {studentFullName} | היעד: {selectedGoal.name} {goalPriceText}
                 </p>
                 {!goalAchieved && (
-                    <p className="text-yellow-200 font-semibold drop-shadow mt-2 finance-title-md">
+                    <p className="text-yellow-200 font-semibold drop-shadow mt-2 text-xl">
                       חזרו לתקן את התכנית כדי להגיע ליעד
                     </p>
                 )}
@@ -1255,9 +1263,9 @@ const FinancialSuccessGame = () => {
 
                 {!goalAchieved && (
                     <div className="text-center space-y-4">
-                      <h3 className="text-3xl font-bold text-orange-600 mb-6">❗ היעד עדיין לא הושג</h3>
+                      <h3 className="text-xl font-bold text-orange-600 mb-6">❗ היעד עדיין לא הושג</h3>
                       <div className="bg-orange-50 rounded-2xl p-6 text-right space-y-3">
-                        <p className="text-xl text-orange-700 font-semibold">
+                        <p className="text-lg text-orange-700 font-semibold">
                           💡 המשך לחסוך ולעקוב אחרי ההוצאות וההכנסות כדי להגיע אליו!
                         </p>
                         <div className="bg-white rounded-xl p-4 mt-3">
@@ -1311,7 +1319,7 @@ const FinancialSuccessGame = () => {
                               <>
                                 {selectedPassiveIncomes.filter(i => !i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} {income.period === 'monthly' ? '₪ לחודש' : '₪'}{income.period === 'monthly' ? ` (≈ ${getPassiveIncomeWeeklyValue(income).toLocaleString()} ₪ לשבוע)` : ''}
                                     </p>
                                 ))}
                                 {selectedActiveIncomes.map((income) => (
@@ -1372,24 +1380,9 @@ const FinancialSuccessGame = () => {
 
               {!goalAchieved && (
                   <div className="bg-white rounded-3xl p-8 shadow-2xl mb-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      <div className="text-center p-6 bg-blue-50 rounded-2xl">
-                        <h4 className="text-xl font-bold mb-3 text-blue-800">פרטי השחקן</h4>
-                        <p className="text-lg mb-1">{studentInfo.firstName} {studentInfo.lastName}</p>
-                        <p className="text-base text-gray-600">{studentInfo.school}</p>
-                        {studentInfo.phone && <p className="text-base text-gray-600">{studentInfo.phone}</p>}
-                      </div>
-
-                      <div className="text-center p-6 bg-orange-50 rounded-2xl">
-                        <h4 className="text-xl font-bold mb-3 text-orange-800">היעד שלך</h4>
-                        <div className="text-5xl mb-2">{selectedGoal.icon}</div>
-                        <p className="text-lg font-bold">{selectedGoal.name}</p>
-                        <p className="text-base text-gray-600">{selectedGoal.price.toLocaleString()} ₪</p>
-                      </div>
-                    </div>
-
+                    
                     {/* פירוט הכנסות והוצאות */}
-                    <div className="bg-gray-50 rounded-2xl p-6">
+                    
                       <h4 className="text-2xl font-bold text-center mb-6 text-gray-800">
                         📊 פירוט הכנסות והוצאות
                       </h4>
@@ -1416,12 +1409,12 @@ const FinancialSuccessGame = () => {
 
                         {/* הכנסות שבועיות */}
                         <div className="bg-blue-50 rounded-2xl p-6">
-                          <h5 className="text-xl font-bold mb-4 text-blue-700">📊 הכנסות שבועיות:</h5>
+                          <h5 className="text-lg font-bold mb-4 text-blue-700">📊 הכנסות שבועיות:</h5>
                           {selectedPassiveIncomes.filter(i => !i.isOneTime).length > 0 || selectedActiveIncomes.length > 0 ? (
                               <>
                                 {selectedPassiveIncomes.filter(i => !i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} {income.period === 'monthly' ? '₪ לחודש' : '₪'}{income.period === 'monthly' ? ` (≈ ${getPassiveIncomeWeeklyValue(income).toLocaleString()} ₪ לשבוע)` : ''}
                                     </p>
                                 ))}
                                 {selectedActiveIncomes.map((income) => (
@@ -1464,8 +1457,7 @@ const FinancialSuccessGame = () => {
                               </p>
                           )}
                         </div>
-                      </div>
-                    </div>
+                      </div>                    
                   </div>
               )}
 
