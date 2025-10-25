@@ -1449,7 +1449,9 @@ code {
 .finance-title-xl {
   font-size: 75px;
 }
-
+.finance-title-end-screen {
+  font-size: 50px;
+}
 .finance-title-lg {
   font-size: 28px;
 }
@@ -1457,7 +1459,9 @@ code {
 .finance-title-md {
   font-size: 24px;
 }
-
+.finance-title-sm {
+  font-size: 16px;
+}
 .finance-countdown {
   font-size: 34px;
 }

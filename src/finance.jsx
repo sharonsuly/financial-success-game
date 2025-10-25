@@ -462,7 +462,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('info');
                     setTimeout(() => playSound('start'), 0);
                   }}
-                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button finance-primary-button"
+                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
               >
                 בואו נתחיל!
               </button>
@@ -1171,11 +1171,11 @@ const FinancialSuccessGame = () => {
           <div className="main-content-padding">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <div className="text-8xl mb-4">{goalAchieved ? '🏆' : '💪'}</div>
-                <h2 className="font-bold text-white mb-4 drop-shadow-lg finance-title-xl">
-                  כל הכבוד!
+                <div className="text-8xl mb-4"></div>
+                <h2 className="font-bold text-white mb-4 drop-shadow-lg finance-title-end-screen">
+                  {goalAchieved ? '🏆' : '💪'}                   כל הכבוד!
                 </h2>
-                <p className="text-yellow-300 font-semibold drop-shadow finance-title-lg">
+                <p className="text-yellow-300 font-semibold drop-shadow finance-title-sm">
                   {goalAchieved ? 'יצרת את תכנית ההצלחה להשגת היעד הכלכלי שלך' : 'עשית צעד חשוב קדימה'}
                 </p>
                 {!goalAchieved && (
