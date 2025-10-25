@@ -1315,11 +1315,11 @@ const FinancialSuccessGame = () => {
                               <>
                                 {selectedPassiveIncomes.filter(i => i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: ₪{income.amount.toLocaleString()}
                                     </p>
                                 ))}
                                 <p className="font-bold text-green-600 text-lg mt-3 pt-3 border-t-2 border-green-200">
-                                  סה״כ: {oneTimeIncome.toLocaleString()} ₪
+                                  סה״כ: ₪{oneTimeIncome.toLocaleString()}
                                 </p>
                               </>
                           ) : (
@@ -1334,16 +1334,19 @@ const FinancialSuccessGame = () => {
                               <>
                                 {selectedPassiveIncomes.filter(i => !i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} {income.period === 'monthly' ? '₪ לחודש' : '₪'}{income.period === 'monthly' ? ` (≈ ${getPassiveIncomeWeeklyValue(income).toLocaleString()} ₪ לשבוע)` : ''}
+                                      • {income.name || 'הכנסה'}: {income.period === 'monthly'
+                                          ? `₪${income.amount.toLocaleString()} לחודש (≈ ₪${getPassiveIncomeWeeklyValue(income).toLocaleString()} לשבוע)`
+                                          : `₪${income.amount.toLocaleString()}`
+                                      }
                                     </p>
                                 ))}
                                 {selectedActiveIncomes.map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪ × {income.timesPerWeek} פעמים = {(income.amount * income.timesPerWeek).toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: ₪{income.amount.toLocaleString()} × {income.timesPerWeek} פעמים = ₪{(income.amount * income.timesPerWeek).toLocaleString()}
                                     </p>
                                 ))}
                                 <p className="font-bold text-blue-600 text-lg mt-3 pt-3 border-t-2 border-blue-200">
-                                  סה״כ: {weeklyIncome.toLocaleString()} ₪ בשבוע
+                                  סה״כ: ₪{weeklyIncome.toLocaleString()} בשבוע
                                 </p>
                               </>
                           ) : (
@@ -1355,17 +1358,17 @@ const FinancialSuccessGame = () => {
                         <div className="bg-red-50 rounded-2xl p-6">
                           <h5 className="text-lg font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
                           <p className="text-gray-700 text-lg mb-2">
-                            • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
+                            • הוצאות אישיות: ₪{weeklyExpenses.toLocaleString()}
                           </p>
                           <p className="font-bold text-red-700 text-lg mt-3 pt-3 border-t-2 border-red-200">
-                            סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
+                            סה״כ: ₪{weeklyExpenses.toLocaleString()} בשבוע
                           </p>
                         </div>
 
                         {/* מאזן שבועי */}
                         <div className={`${weeklyBalance >= 0 ? 'bg-green-100' : 'bg-orange-100'} rounded-2xl p-6`}>
                           <p className={`font-bold text-lg ${weeklyBalance >= 0 ? 'text-green-700' : 'text-orange-700'}`}>
-                            {weeklyBalance >= 0 ? '✅' : '⚠️'} מאזן שבועי: {Math.abs(weeklyBalance).toLocaleString()}{weeklyBalance > 0 ? '+ ' : weeklyBalance < 0 ? '- ' : ' '}₪
+                            {weeklyBalance >= 0 ? '✅' : '⚠️'} מאזן שבועי: {formattedWeeklyBalance}
                           </p>
                           {weeklyBalance >= 0 ? (
                               <p className="text-green-600 text-lg mt-2">
@@ -1410,11 +1413,11 @@ const FinancialSuccessGame = () => {
                               <>
                                 {selectedPassiveIncomes.filter(i => i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: ₪{income.amount.toLocaleString()}
                                     </p>
                                 ))}
                                 <p className="font-bold text-green-600 text-lg mt-3 pt-3 border-t-2 border-green-200">
-                                  סה״כ: {oneTimeIncome.toLocaleString()} ₪
+                                  סה״כ: ₪{oneTimeIncome.toLocaleString()}
                                 </p>
                               </>
                           ) : (
@@ -1429,16 +1432,19 @@ const FinancialSuccessGame = () => {
                               <>
                                 {selectedPassiveIncomes.filter(i => !i.isOneTime).map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} {income.period === 'monthly' ? '₪ לחודש' : '₪'}{income.period === 'monthly' ? ` (≈ ${getPassiveIncomeWeeklyValue(income).toLocaleString()} ₪ לשבוע)` : ''}
+                                      • {income.name || 'הכנסה'}: {income.period === 'monthly'
+                                          ? `₪${income.amount.toLocaleString()} לחודש (≈ ₪${getPassiveIncomeWeeklyValue(income).toLocaleString()} לשבוע)`
+                                          : `₪${income.amount.toLocaleString()}`
+                                      }
                                     </p>
                                 ))}
                                 {selectedActiveIncomes.map((income) => (
                                     <p key={income.id} className="text-gray-700 text-lg mb-2">
-                                      • {income.name || 'הכנסה'}: {income.amount.toLocaleString()} ₪ × {income.timesPerWeek} פעמים = {(income.amount * income.timesPerWeek).toLocaleString()} ₪
+                                      • {income.name || 'הכנסה'}: ₪{income.amount.toLocaleString()} × {income.timesPerWeek} פעמים = ₪{(income.amount * income.timesPerWeek).toLocaleString()}
                                     </p>
                                 ))}
                                 <p className="font-bold text-blue-600 text-lg mt-3 pt-3 border-t-2 border-blue-200">
-                                  סה״כ: {weeklyIncome.toLocaleString()} ₪ בשבוע
+                                  סה״כ: ₪{weeklyIncome.toLocaleString()} בשבוע
                                 </p>
                               </>
                           ) : (
@@ -1450,17 +1456,17 @@ const FinancialSuccessGame = () => {
                         <div className="bg-red-50 rounded-2xl p-6">
                           <h5 className="text-lg font-bold mb-4 text-red-700">💸 הוצאות שבועיות:</h5>
                           <p className="text-gray-700 text-lg mb-2">
-                            • הוצאות אישיות: {weeklyExpenses.toLocaleString()} ₪
+                            • הוצאות אישיות: ₪{weeklyExpenses.toLocaleString()}
                           </p>
                           <p className="font-bold text-red-700 text-lg mt-3 pt-3 border-t-2 border-red-200">
-                            סה״כ: {weeklyExpenses.toLocaleString()} ₪ בשבוע
+                            סה״כ: ₪{weeklyExpenses.toLocaleString()} בשבוע
                           </p>
                         </div>
 
                         {/* מאזן שבועי */}
                         <div className={`${weeklyBalance >= 0 ? 'bg-green-100' : 'bg-orange-100'} rounded-2xl p-6`}>
                           <p className={`font-bold text-2xl ${weeklyBalance >= 0 ? 'text-green-700' : 'text-orange-700'}`}>
-                            {weeklyBalance >= 0 ? '✅' : '⚠️'} מאזן שבועי: {Math.abs(weeklyBalance).toLocaleString()}{weeklyBalance > 0 ? '+ ' : weeklyBalance < 0 ? '- ' : ' '}₪
+                            {weeklyBalance >= 0 ? '✅' : '⚠️'} מאזן שבועי: {formattedWeeklyBalance}
                           </p>
                           {weeklyBalance >= 0 ? (
                               <p className="text-green-600 text-lg mt-2">
