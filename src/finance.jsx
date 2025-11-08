@@ -470,7 +470,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('info');
                     setTimeout(() => playSound('start'), 0);
                   }}
-                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
+                  className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-500"
               >
                 בואו נתחיל!
               </button>
@@ -485,7 +485,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md top-bar-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -543,7 +543,7 @@ const FinancialSuccessGame = () => {
                     setCurrentStage('goals');
                   }}
                   disabled={!studentInfo.firstName || !studentInfo.lastName}
-                  className={`w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 finance-cta-button ${!studentInfo.firstName || !studentInfo.lastName ? 'finance-disabled-button' : 'bg-yellow-600'}`}
+                  className={`w-full mt-8 hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 rounded-full text-xl transition-all duration-200 transform hover:scale-105 active:scale-95 finance-cta-button ${!studentInfo.firstName || !studentInfo.lastName ? 'finance-disabled-button' : 'bg-yellow-500'}`}
               >
                 המשך לבחירת יעד
               </button>
@@ -559,7 +559,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md top-bar-padding">
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -638,7 +638,7 @@ const FinancialSuccessGame = () => {
                           playSound('continue');
                           setCurrentStage('passive income');
                         }}
-                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
+                        className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-500"
                     >
                       בואו נתחיל לחשב!
                     </button>
@@ -659,7 +659,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -801,7 +801,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('active income');
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-500"
                 >
                   המשך להכנסות אקטיביות
                 </button>
@@ -820,7 +820,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4 p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -1000,7 +1000,7 @@ const FinancialSuccessGame = () => {
                       playSound('continue');
                       setCurrentStage('expenses');
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-500"
                 >
                   המשך להוצאות
                 </button>
@@ -1020,7 +1020,7 @@ const FinancialSuccessGame = () => {
           <div className="sticky top-0 z-50 bg-white shadow-md">
             <div className="max-w-6xl mx-auto p-4">
               <div className="flex justify-between items-center mb-4 p-4">
-                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+                <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                   <ArrowRight className="w-5 h-5" />
                   חזרה
                 </button>
@@ -1119,7 +1119,7 @@ const FinancialSuccessGame = () => {
                         setCurrentStage('summary');
                       }}
                       disabled={!selectedExpense}
-                      className={`hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button ${selectedExpense ? 'bg-yellow-600' : 'finance-disabled-button'}`}
+                      className={`hover:bg-opacity-90 active:bg-opacity-80 disabled:opacity-50 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button ${selectedExpense ? 'bg-yellow-500' : 'finance-disabled-button'}`}
                   >
                     סיום המשחק
                   </button>
@@ -1177,7 +1177,7 @@ const FinancialSuccessGame = () => {
         <div className={`min-h-screen ${bgGradient}`} dir="rtl">
           <div className="sticky top-0 z-50 bg-white shadow-md p-4" style={{padding:'0.5rem'}}>
             <div className="max-w-6xl mx-auto flex justify-between items-center">
-              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-600">
+              <button onClick={goBack} className="flex items-center gap-2 text-white hover:bg-opacity-90 active:bg-opacity-80 px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 active:scale-95 bg-yellow-500">
                 <ArrowRight className="w-5 h-5" />
                 חזרה
               </button>
@@ -1488,7 +1488,7 @@ const FinancialSuccessGame = () => {
                       playSound('start');
                       resetGame();
                     }}
-                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-600"
+                    className="hover:bg-opacity-90 active:bg-opacity-80 text-white font-bold py-4 px-8 rounded-full text-2xl shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-200 finance-cta-button bg-yellow-500"
                 >
                   <RotateCcw className="w-6 h-6 inline ml-2" />
                   התחילו מחדש
